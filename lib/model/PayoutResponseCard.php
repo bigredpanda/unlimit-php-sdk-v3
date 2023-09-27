@@ -1,7 +1,7 @@
 <?php
 
 /**
- * PHP SDK for Unlimit API v3. All rights reserved.
+ * PHP SDK for Unlimint API v3. All rights reserved.
  */
 
 namespace Cardpay\model;
@@ -9,7 +9,7 @@ namespace Cardpay\model;
 use \ArrayAccess;
 use \Cardpay\ObjectSerializer;
 
-class RefundResponseCardAccount implements ModelInterface, ArrayAccess
+class PayoutResponseCard implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -18,7 +18,7 @@ class RefundResponseCardAccount implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RefundResponseCardAccount';
+    protected static $swaggerModelName = 'PayoutResponseCard';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -28,6 +28,8 @@ class RefundResponseCardAccount implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'card_brand' => 'string',
         'card_type' => 'string',
+        'expiration' => 'string',
+        'holder' => 'string',
         'issuer' => 'string',
         'issuing_country_code' => 'string',
         'masked_pan' => 'string'
@@ -41,6 +43,8 @@ class RefundResponseCardAccount implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'card_brand' => null,
         'card_type' => null,
+        'expiration' => null,
+        'holder' => null,
         'issuer' => null,
         'issuing_country_code' => null,
         'masked_pan' => null
@@ -75,6 +79,8 @@ class RefundResponseCardAccount implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'card_brand' => 'card_brand',
         'card_type' => 'card_type',
+        'expiration' => 'expiration',
+        'holder' => 'holder',
         'issuer' => 'issuer',
         'issuing_country_code' => 'issuing_country_code',
         'masked_pan' => 'masked_pan'
@@ -88,6 +94,8 @@ class RefundResponseCardAccount implements ModelInterface, ArrayAccess
     protected static $setters = [
         'card_brand' => 'setCardBrand',
         'card_type' => 'setCardType',
+        'expiration' => 'setExpiration',
+        'holder' => 'setHolder',
         'issuer' => 'setIssuer',
         'issuing_country_code' => 'setIssuingCountryCode',
         'masked_pan' => 'setMaskedPan'
@@ -101,6 +109,8 @@ class RefundResponseCardAccount implements ModelInterface, ArrayAccess
     protected static $getters = [
         'card_brand' => 'getCardBrand',
         'card_type' => 'getCardType',
+        'expiration' => 'getExpiration',
+        'holder' => 'getHolder',
         'issuer' => 'getIssuer',
         'issuing_country_code' => 'getIssuingCountryCode',
         'masked_pan' => 'getMaskedPan'
@@ -189,6 +199,8 @@ class RefundResponseCardAccount implements ModelInterface, ArrayAccess
     {
         $this->container['card_brand'] = isset($data['card_brand']) ? $data['card_brand'] : null;
         $this->container['card_type'] = isset($data['card_type']) ? $data['card_type'] : null;
+        $this->container['expiration'] = isset($data['expiration']) ? $data['expiration'] : null;
+        $this->container['holder'] = isset($data['holder']) ? $data['holder'] : null;
         $this->container['issuer'] = isset($data['issuer']) ? $data['issuer'] : null;
         $this->container['issuing_country_code'] = isset($data['issuing_country_code']) ? $data['issuing_country_code'] : null;
         $this->container['masked_pan'] = isset($data['masked_pan']) ? $data['masked_pan'] : null;
@@ -284,6 +296,54 @@ class RefundResponseCardAccount implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets expiration
+     *
+     * @return string
+     */
+    public function getExpiration()
+    {
+        return $this->container['expiration'];
+    }
+
+    /**
+     * Sets expiration
+     *
+     * @param string $expiration Customer’s card expiration date. Format: `mm/yyyy`
+     *
+     * @return $this
+     */
+    public function setExpiration($expiration)
+    {
+        $this->container['expiration'] = $expiration;
+
+        return $this;
+    }
+
+    /**
+     * Gets holder
+     *
+     * @return string
+     */
+    public function getHolder()
+    {
+        return $this->container['holder'];
+    }
+
+    /**
+     * Sets holder
+     *
+     * @param string $holder Customer's cardholder name. Any valid cardholder name. Not present by default, ask CardPay manager to enable it if needed.
+     *
+     * @return $this
+     */
+    public function setHolder($holder)
+    {
+        $this->container['holder'] = $holder;
+
+        return $this;
+    }
+
+    /**
      * Gets issuer
      *
      * @return string
@@ -344,7 +404,7 @@ class RefundResponseCardAccount implements ModelInterface, ArrayAccess
     /**
      * Sets masked_pan
      *
-     * @param string $masked_pan Masked PAN (shows first 6 digits and 4 last digits)
+     * @param string $masked_pan Masked PAN (shows first 6 digits and 4 last digits of the PAN)
      *
      * @return $this
      */
